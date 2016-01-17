@@ -6,7 +6,7 @@ authentication with cookies
  No special headers needed while browser sends cookies with any request. 
 
 ### Setup
-  * Before using, additional setup should be done. [cookie-parser](https://github.com/expressjs/cookie-parser) is required:
+* Before using, additional setup should be done. [cookie-parser](https://github.com/expressjs/cookie-parser) is required:
  ```js 
      var express = require('express');
      var cookieParser = require('cookie-parser');
@@ -14,7 +14,7 @@ authentication with cookies
      app.use(cookieParser());
  ```
  
- * [passport](https://github.com/jaredhanson/passport) should be installed and configured.
+* [passport](https://github.com/jaredhanson/passport) should be installed and configured.
  ```js
      passport.use(new CookieStrategy(function (token, done) {
          User.findOne({token: token})
@@ -24,16 +24,18 @@ authentication with cookies
                  }
                  done(null, user);
              });
+     });
  ```
- As a first parameter it can be passed an object with property `key`, which sets the key of the cookie, to authorize. If not provided default key is set `Authorization`.
+ As a first parameter it can be passed an object with property `key`, which sets the key of the cookie, to authorize. If not provided default key is set `Authorization`:
+ 
  `new CookieStrategy( {key: 'my-custom-key'}, function(token, done) { ... }`
  
- * Access to the key:
+* Access to the key:
  ```js
     var cookieAuthKey = require('../src/passport-cookie').key();
  ```
  
- * On login(or whatever public route) set the cookie to the client.
+* On login(or whatever public route) set the cookie to the client.
  ```js
     router.post('/login', function (req, res) {
             // code... 
@@ -42,15 +44,17 @@ authentication with cookies
     });            
  ```
  
- * Set to any route middleware like this and will have access to `req.user`. If this middleware does'n exits, `req.user`
+* Set to any route middleware like this and will have access to `req.user`. If this middleware does'n exits, `req.user`
  will be __undefined__.
  ```js
-     router.get('/profile', passport.authenticate('cookie', { session: false }), function (req, res) {
+     router.get('/profile',
+         passport.authenticate('cookie', { session: false }), 
+         function (req, res) {
              res.json(req.user);
          });
  ``` 
  
- * To clear cookie 
+* To clear cookie 
  ```js
     router.post('/logout', function (req, res) {
             req.logout();
@@ -59,12 +63,12 @@ authentication with cookies
         });
  ```
  
- * __Warning__ while making configuration, passport strategy should be configured before routes.
+* __Warning__ while making configuration, passport strategy should be configured before routes.
  
 ### Example
  open `cmd` on windows and navigate to `example` folder
  
- * [Link](http://example.com)
+ * [Link](./example)
  
  * ..\passport-cookie\example> npm install
  * ..\passport-cookie\example> npm start
