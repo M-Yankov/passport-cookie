@@ -1,0 +1,17 @@
+{
+  "name": "passport-cookie",
+  "version": "1.0.0",
+  "description": "example",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "author": "MY",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.14.2",
+    "cookie-parser": "^1.4.1",
+    "express": "^4.13.3",
+    "passport": "latest"
+  }
+}
